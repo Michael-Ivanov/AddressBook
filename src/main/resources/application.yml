@@ -1,0 +1,12 @@
+server:
+  port: 8000
+
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost/hhh
+    username: hbstudent
+    password: hbstudent
+    initialization-mode: always
+
+
