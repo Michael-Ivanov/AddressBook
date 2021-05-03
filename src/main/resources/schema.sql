@@ -1,21 +1,21 @@
-drop table if exists person cascade;
+DROP TABLE if EXISTS person CASCADE;
 
-create table person(
-    id serial primary key,
+CREATE TABLE person(
+    id serial PRIMARY KEY,
     firstname text,
     lastname text,
     birthday date,
     phone text
 );
 
-drop table if exists address;
+DROP TABLE if EXISTS address;
 
-create table address(
-    id serial primary key,
+CREATE TABLE address(
+    id serial PRIMARY KEY,
     country text,
     zipcode int,
     city text,
     street text,
     person_id int,
-    foreign key (person_id) references person(id)
+    FOREIGN KEY (person_id) REFERENCES person(id)
 );
