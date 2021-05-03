@@ -1,17 +1,21 @@
 package com.miv.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
+@Table(name = "person")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Person {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "firstname")
     private String firstName;

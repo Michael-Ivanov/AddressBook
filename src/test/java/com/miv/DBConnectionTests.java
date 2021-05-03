@@ -45,9 +45,7 @@ public class DBConnectionTests {
 
         Person testPerson = personService.getById(999);
         assertEquals("Mike", testPerson.getFirstName());
-        System.out.println(testPerson.getFirstName());
         assertEquals("Smith", testPerson.getLastName());
-        System.out.println(testPerson.getLastName());
         assertEquals("+7234234444333", testPerson.getPhoneNumber());
     }
 
