@@ -1,5 +1,6 @@
 package com.miv;
 
+import com.miv.entity.Address;
 import com.miv.entity.Person;
 import com.miv.repository.PersonRepository;
 import com.miv.service.PersonService;
@@ -21,11 +22,20 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SpringBootTest
 public class DBConnectionTests {
 
+    private Person person;
+    private Address address;
+
     @Autowired
     private DataSource dataSource;
 
     @Autowired
     private PersonService personService;
+
+    @BeforeEach
+    private void createPersonAndAddress() {
+        person = new Person();
+        address = new Address();
+    }
 
     @Test
     public void shouldConnectToDb() throws SQLException {
@@ -34,20 +44,31 @@ public class DBConnectionTests {
 
     @Test
     @Transactional
-    public void shouldSaveAndRetrieveNewPersonFromDB() {
-        Person person = new Person(
-                999,
-                "Mike",
-                "Smith",
-                Date.valueOf("1984-10-02"),
-                "+7234234444333");
+    public void shouldSaveAndRetrieveNewPersonWithAddressFromDB() {
+
+        address.setId(999);
+        address.setCountry("UK");
+        address.setZipCode(55436);
+        address.setCity("Oxford");
+        address.setStreet("Great Clarendon St 55");
+
+        person.setId(999);
+        person.setFirstName("Mike");
+        person.setLastName("Smith");
+        person.setBirthday(Date.valueOf("1984-10-02"));
+        person.setPhoneNumber("+7234234444333");
+        person.addAddress(address);
         personService.savePerson(person);
 
         Person testPerson = personService.getById(999);
+        System.out.println("test output >>> " + testPerson.getAddresses());
         assertEquals("Mike", testPerson.getFirstName());
         assertEquals("Smith", testPerson.getLastName());
         assertEquals("+7234234444333", testPerson.getPhoneNumber());
-    }
 
+        Address testAddress = testPerson.getAddresses().get(0);
+        assertEquals("Oxford", testAddress.getCity());
+        assertEquals(55436, testAddress.getZipCode());
+    }
 
 }
