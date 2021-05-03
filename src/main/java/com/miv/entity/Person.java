@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "person")
@@ -25,6 +27,17 @@ public class Person {
     private Date birthday;
     @Column(name = "phone")
     private String phoneNumber;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "person_id")
+    private List<Address> addresses;
+
+    public void addAddress(Address address) {
+        if (addresses ==  null) {
+            addresses = new ArrayList<>();
+        }
+        addresses.add(address);
+    }
 
 
 }

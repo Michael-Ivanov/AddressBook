@@ -1,16 +1,21 @@
 package com.miv.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Address {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "country")
     private String country;
@@ -20,7 +25,5 @@ public class Address {
     private String city;
     @Column(name = "street")
     private String street;
-    @Column(name = "person_id")
-    private int personId;
 
 }
