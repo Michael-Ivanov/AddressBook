@@ -4,6 +4,7 @@ import com.miv.entity.Person;
 import com.miv.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PersonService {
@@ -19,7 +20,7 @@ public class PersonService {
         return repo.getOne(id);
     }
 
-    public void savePerson(Person person) {
-        repo.save(person);
+    public Person savePerson(Person person) {
+        return repo.save(person);
     }
 }
