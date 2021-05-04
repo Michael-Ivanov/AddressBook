@@ -43,7 +43,7 @@ class PersonServiceTest {
     }
 
     @Test
-    public void shouldRetrieveNewPersonWithAddress() {
+    public void shouldRetrievePersonWithAddress() {
 
         Person testPerson = personService.getById(999);
         System.out.println("test output >>> " + testPerson.getAddresses());

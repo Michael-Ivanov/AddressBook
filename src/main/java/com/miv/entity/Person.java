@@ -28,7 +28,7 @@ public class Person {
     @Column(name = "phone")
     private String phoneNumber;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id")
     private List<Address> addresses;
 
