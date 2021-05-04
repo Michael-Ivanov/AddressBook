@@ -27,4 +27,9 @@ public class HomeController {
         model.addAttribute(personList);
         return "home";
     }
+
+    @GetMapping("/simple")
+    public String simpleTest() {
+        return "simple-test";
+    }
 }
