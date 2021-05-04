@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class PersonService {
 
@@ -14,6 +16,10 @@ public class PersonService {
     @Autowired
     public PersonService(PersonRepository repo) {
         this.repo = repo;
+    }
+
+    public List<Person> getAll() {
+        return repo.findAll();
     }
 
     public Person getById(int id) {
