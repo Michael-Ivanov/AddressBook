@@ -1,12 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Index page</title>
 </head>
 <body>
+<h2>Address book</h2>
 
-<h2>Hello</h2>
+<table>
+    <thead>
+    <tr>
+        <td>ID</td>
+        <td>Full Name</td>
+        <td>Birthday</td>
+        <td>Phone Number</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="person : ${personList}">
+        <td th:text="${person.getId()} "></td>
+        <td th:text="${person.getFirstName() + ' ' + person.getLastName()}"></td>
+        <td th:text="${person.getBirthday()}"></td>
+        <td th:text="${person.getPhoneNumber()}"></td>
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>
