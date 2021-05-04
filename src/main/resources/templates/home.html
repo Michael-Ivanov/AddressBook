@@ -5,28 +5,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Index page</title>
+    <link rel="stylesheet" href="/style.css">
+
+    <script>
+        var toggler = document.getElementsByClassName("caret");
+        var i;
+
+        for (i = 0; i < toggler.length; i++) {
+            toggler[i].addEventListener("click", function () {
+                this.parentElement.querySelector(".nested").classList.toggle("active");
+                this.classList.toggle("caret-down");
+            });
+        }
+
+    </script>
+
+
 </head>
 <body>
 <h2>Address book</h2>
 
-<table>
-    <thead>
-    <tr>
-        <td>ID</td>
-        <td>Full Name</td>
-        <td>Birthday</td>
-        <td>Phone Number</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="person : ${personList}">
-        <td th:text="${person.getId()} "></td>
-        <td th:text="${person.getFirstName() + ' ' + person.getLastName()}"></td>
-        <td th:text="${person.getBirthday()}"></td>
-        <td th:text="${person.getPhoneNumber()}"></td>
-    </tr>
-    </tbody>
-</table>
+<a th:href="@{/simple}">Simple test</a>
+
+<ul id="myUl" th:each="person : ${personList}">
+    <li><span class="caret" th:text="${person.getFirstName() + ' ' + person.getLastName()}"></span>
+        <ul class="nested">
+            <li><span class="caret" th:text="${person.getPhoneNumber()}"></span>
+            </li>
+        </ul>
+    </li>
+</ul>
 
 </body>
 </html>
