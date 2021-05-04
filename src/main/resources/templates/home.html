@@ -6,22 +6,8 @@
     <meta charset="UTF-8">
     <title>Index page</title>
     <link rel="stylesheet" href="/style.css">
-
-    <script>
-        var toggler = document.getElementsByClassName("caret");
-        var i;
-
-        for (i = 0; i < toggler.length; i++) {
-            toggler[i].addEventListener("click", function () {
-                this.parentElement.querySelector(".nested").classList.toggle("active");
-                this.classList.toggle("caret-down");
-            });
-        }
-
-    </script>
-
-
 </head>
+
 <body>
 <h2>Address book</h2>
 
@@ -35,6 +21,17 @@
         </ul>
     </li>
 </ul>
+<script>
+    var toggler = document.getElementsByClassName("caret");
+    var i;
 
+    for (i = 0; i < toggler.length; i++) {
+        toggler[i].addEventListener("click", function () {
+            this.parentElement.querySelector(".nested").classList.toggle("active");
+            this.classList.toggle("caret-down");
+        });
+    }
+
+</script>
 </body>
 </html>
