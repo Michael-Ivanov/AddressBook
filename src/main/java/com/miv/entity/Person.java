@@ -28,8 +28,7 @@ public class Person {
     @Column(name = "phone")
     private String phoneNumber;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "person_id")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "person")
     private List<Address> addresses;
 
     public void addAddress(Address address) {
@@ -37,6 +36,7 @@ public class Person {
             addresses = new ArrayList<>();
         }
         addresses.add(address);
+        address.setPerson(this);
     }
 
 
