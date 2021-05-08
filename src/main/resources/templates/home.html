@@ -6,6 +6,48 @@
     <meta charset="UTF-8">
     <title>Index page</title>
     <link rel="stylesheet" href="/style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        function expandPersonDetails(event) {
+            event = event || window.event;
+            var clickedElem = event.target;
+            clickedElem.parentElement.querySelector(".nested").classList.toggle("active");
+            clickedElem.classList.toggle("caret-down");
+        }
+
+        function expandAddressDetails() {
+            var clickedElem = event.target;
+            var elemId = clickedElem.id;
+
+
+            var myList = document.createElement('ul');
+
+            // myList.innerHTML = 'hint';
+
+            var addresses = $.get("/api/addresses/" + elemId);
+            for (let i = 0; i < addresses.size; i++) {
+                var li = document.createElement('li');
+                li.innerHTML = addresses[i];
+                myList.appendChild(li);
+            }
+
+
+            clickedElem.parentElement.appendChild(myList);
+            myList.onclick = function () {
+                alert('I am alert! id = ' + elemId + '. addresses: ' + addresses.toString())
+            };
+
+
+
+
+            clickedElem.onclick=null;
+
+        }
+
+    </script>
+
 </head>
 
 <body>
@@ -14,24 +56,19 @@
 <a th:href="@{/simple}">Simple test</a>
 
 <ul id="myUl" th:each="person : ${personList}">
-    <li><span class="caret" th:text="${person.getFirstName() + ' ' + person.getLastName()}"></span>
+    <li><span class="caret" th:text="${person.getFirstName() + ' ' + person.getLastName()}"
+              onclick="expandPersonDetails()"></span>
         <ul class="nested">
-            <li><span class="caret" th:text="${person.getPhoneNumber()}"></span>
+            <li><span th:text="${'Phone number: ' + person.getPhoneNumber()}"></span></li>
+            <li><span th:text="${'Birthday: ' + person.getBirthday()}"></span></li>
+            <li>
+                <span class="caret" th:id="${person.getId()}" th:text="Address" onclick="expandAddressDetails()"></span>
+
             </li>
         </ul>
     </li>
 </ul>
-<script>
-    var toggler = document.getElementsByClassName("caret");
-    var i;
 
-    for (i = 0; i < toggler.length; i++) {
-        toggler[i].addEventListener("click", function () {
-            this.parentElement.querySelector(".nested").classList.toggle("active");
-            this.classList.toggle("caret-down");
-        });
-    }
 
-</script>
 </body>
 </html>
